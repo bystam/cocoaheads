@@ -15,7 +15,7 @@ final class CuteTabBarTheme: NSObject {
         self.backgroundColor = backgroundColor
     }
 
-    static let gray: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .red,
+    static let gray: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .cuteRed,
                                                        deselectedColor: .lightGray,
                                                        backgroundColor: .white)
     static let transparent: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .white,
@@ -59,7 +59,8 @@ final class CuteTabBarController: UITabBarController {
     }
 
     private func paint(_ item: UITabBarItem, with theme: CuteTabBarTheme) {
-
+        item.selectedImage = item.selectedImage?.tinted(with: theme.selectedColor)
+        item.image = item.image?.tinted(with: theme.deselectedColor)
     }
 }
 

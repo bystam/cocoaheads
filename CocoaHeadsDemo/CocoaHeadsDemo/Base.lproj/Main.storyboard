@@ -9,7 +9,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Money-->
+        <!--Home View Controller-->
         <scene sceneID="hNz-n2-bh7">
             <objects>
                 <viewController id="9pv-A4-QxB" customClass="HomeViewController" customModule="CocoaHeadsDemo" customModuleProvider="target" sceneMemberID="viewController">
@@ -21,15 +21,27 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="appy halloween" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="KQZ-1w-vlD">
-                                <rect key="frame" x="73" y="50" width="229" height="43"/>
+                                <rect key="frame" x="73" y="94" width="229" height="43"/>
                                 <fontDescription key="fontDescription" type="system" weight="thin" pointSize="36"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lt5-uo-df4">
+                                <rect key="frame" x="122.5" y="497" width="130" height="41"/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="24"/>
+                                <state key="normal" title="Get Started">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <segue destination="MAR-WU-Msp" kind="show" id="cze-Bt-78q"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Lt5-uo-df4" firstAttribute="centerX" secondItem="PQr-Ze-W5v" secondAttribute="centerX" id="5uS-gn-Vj1"/>
                             <constraint firstAttribute="centerX" secondItem="KQZ-1w-vlD" secondAttribute="centerX" id="6BV-lF-sBN"/>
+                            <constraint firstItem="PQr-Ze-W5v" firstAttribute="bottom" secondItem="Lt5-uo-df4" secondAttribute="bottom" constant="80" id="IFZ-Uh-KxZ"/>
                             <constraint firstItem="Ku0-o2-SAg" firstAttribute="top" secondItem="tsR-hK-woN" secondAttribute="top" id="JfB-hp-hsa"/>
                             <constraint firstAttribute="trailing" secondItem="Ku0-o2-SAg" secondAttribute="trailing" id="TlN-zr-OyA"/>
                             <constraint firstAttribute="bottom" secondItem="Ku0-o2-SAg" secondAttribute="bottom" id="U1e-hm-SkS"/>
@@ -38,11 +50,11 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PQr-Ze-W5v"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Money" image="first" selectedImage="first" id="acW-dT-cKf"/>
+                    <navigationItem key="navigationItem" id="Xjh-53-bHC"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="W5J-7L-Pyd" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="750" y="-320"/>
+            <point key="canvasLocation" x="1486" y="-321"/>
         </scene>
         <!--Voice-->
         <scene sceneID="wg7-f3-ORb">
@@ -91,13 +103,61 @@
                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBar>
                     <connections>
-                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
+                        <segue destination="8Fj-p0-FUf" kind="relationship" relationship="viewControllers" id="u7Y-xg-7CH"/>
                         <segue destination="8rJ-Kc-sve" kind="relationship" relationship="viewControllers" id="lzU-1b-eKA"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HuB-VB-40B" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="0.0" y="0.0"/>
+        </scene>
+        <!--Money-->
+        <scene sceneID="ihy-mi-vrv">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8Fj-p0-FUf" customClass="CuteNavigationController" customModule="CocoaHeadsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Money" image="first" selectedImage="first" id="acW-dT-cKf"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="mOK-Vd-lcl" customClass="CuteNavigationBar" customModule="CocoaHeadsDemo" customModuleProvider="target">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="9pv-A4-QxB" kind="relationship" relationship="rootViewController" id="Mlw-t9-GzN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CJh-oU-c0N" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="749.60000000000002" y="-320.68965517241384"/>
+        </scene>
+        <!--Voice-->
+        <scene sceneID="Gpf-U7-3mc">
+            <objects>
+                <viewController id="MAR-WU-Msp" customClass="DetailViewController" customModule="CocoaHeadsDemo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="XrJ-4u-NXc">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Detail" textAlignment="center" lineBreakMode="tailTruncation" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="tFM-8P-h2R">
+                                <rect key="frame" x="143.5" y="312" width="88.5" height="43"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="36"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="centerX" secondItem="tFM-8P-h2R" secondAttribute="centerX" id="EVR-iR-vFN"/>
+                            <constraint firstAttribute="centerY" secondItem="tFM-8P-h2R" secondAttribute="centerY" id="LJL-qN-eHj"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="2y2-oU-4b1"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Voice" image="second" selectedImage="second" id="fjh-Jl-f5l"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="pBP-OB-9PK" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2180" y="-322"/>
         </scene>
     </scenes>
     <resources>

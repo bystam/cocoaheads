@@ -10,9 +10,11 @@ class HomeViewController: UIViewController {
         super.viewDidLoad()
     }
 
+    override var prefersNavigationBarTransparent: Bool {
+        return true
+    }
+
     override var tabBarTheme: CuteTabBarTheme {
         return .transparent
     }
-
 }
-

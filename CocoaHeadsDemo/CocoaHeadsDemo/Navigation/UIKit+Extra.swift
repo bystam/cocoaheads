@@ -4,6 +4,12 @@
 
 import UIKit
 
+extension UIColor {
+
+    static var cuteRed: UIColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1.0)
+
+}
+
 extension UIImage {
 
     func tinted(with color: UIColor) -> UIImage {
