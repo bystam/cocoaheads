@@ -12,7 +12,7 @@ final class CuteNavigationController: UINavigationController {
     }
 
     override var tabBarTheme: CuteTabBarTheme {
-        return topViewController?.tabBarTheme ?? .gray
+        return topViewController?.tabBarTheme ?? .light
     }
 
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -99,7 +99,7 @@ final class CuteNavigationBar: UINavigationBar {
 
     private let backgroundView: UIView = {
         let view = UIView()
-        view.backgroundColor = .cuteRed
+        view.backgroundColor = .darkPurple
         return view
     }()
 

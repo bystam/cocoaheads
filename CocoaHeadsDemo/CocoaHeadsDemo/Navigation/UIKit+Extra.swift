@@ -6,8 +6,16 @@ import UIKit
 
 extension UIColor {
 
-    static var cuteRed: UIColor = UIColor(red: 0.8, green: 0.2, blue: 0.2, alpha: 1.0)
+    static var darkPurple: UIColor = UIColor(red: (71.0 / 255),
+                                             green: (17.0 / 255),
+                                             blue: (144.0 / 255),
+                                             alpha: 1.0)
 
+    var isClear: Bool {
+        var alpha: CGFloat = 0.0
+        getWhite(nil, alpha: &alpha)
+        return alpha < 0.0000001
+    }
 }
 
 extension UIImage {

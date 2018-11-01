@@ -8,23 +8,37 @@ final class CuteTabBarTheme: NSObject {
     let selectedColor: UIColor
     let deselectedColor: UIColor
     let backgroundColor: UIColor
+    let hasShadow: Bool
 
-    init(selectedColor: UIColor, deselectedColor: UIColor, backgroundColor: UIColor) {
+    private init(selectedColor: UIColor, deselectedColor: UIColor, backgroundColor: UIColor, hasShadow: Bool) {
         self.selectedColor = selectedColor
         self.deselectedColor = deselectedColor
         self.backgroundColor = backgroundColor
+        self.hasShadow = hasShadow
     }
 
-    static let gray: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .cuteRed,
-                                                       deselectedColor: .lightGray,
-                                                       backgroundColor: .white)
+    static let light: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .darkPurple,
+                                                        deselectedColor: .lightGray,
+                                                        backgroundColor: UIColor(red: (253.0 / 255),
+                                                                                 green: (248.0 / 255),
+                                                                                 blue: (255.0 / 255),
+                                                                                 alpha: 1.0),
+                                                        hasShadow: true)
     static let transparent: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .white,
                                                               deselectedColor: .lightGray,
-                                                              backgroundColor: .clear)
+                                                              backgroundColor: .clear,
+                                                              hasShadow: false)
 }
 
 
 final class CuteTabBarController: UITabBarController {
+
+    private let barShadowView: UIView = {
+        let view = UIView()
+        view.autoresizingMask = [.flexibleBottomMargin]
+        view.backgroundColor = UIColor(white: 0.0, alpha: 0.1)
+        return view
+    }()
 
     override var selectedIndex: Int {
         didSet {
@@ -40,9 +54,10 @@ final class CuteTabBarController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        tabBar.isTranslucent = true
         tabBar.shadowImage = UIImage()
         tabBar.backgroundImage = UIImage()
+        tabBar.addSubview(barShadowView)
+        barShadowView.frame = CGRect(x: 0, y: 0, width: tabBar.bounds.width, height: 1.0)
     }
 
     private func reloadTabBarStyle() {
@@ -51,7 +66,9 @@ final class CuteTabBarController: UITabBarController {
         }
 
         tabBar.tintColor = theme.selectedColor
+        tabBar.isTranslucent = theme.backgroundColor.isClear
         tabBar.barTintColor = theme.backgroundColor
+        barShadowView.isHidden = !theme.hasShadow
 
         viewControllers?
             .compactMap { $0.tabBarItem }
@@ -68,6 +85,6 @@ extension UIViewController {
 
     @objc(cute_tabBarTheme)
     var tabBarTheme: CuteTabBarTheme {
-        return .gray
+        return .light
     }
 }
