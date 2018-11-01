@@ -28,6 +28,10 @@ final class CuteTabBarTheme: NSObject {
                                                               deselectedColor: .lightGray,
                                                               backgroundColor: .clear,
                                                               hasShadow: false)
+    static let dark: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .white,
+                                                       deselectedColor: .lightGray,
+                                                       backgroundColor: UIColor(white: 0.1, alpha: 1.0),
+                                                       hasShadow: false)
 }
 
 

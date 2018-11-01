@@ -4,17 +4,20 @@
 
 import UIKit
 
-class HomeViewController: UIViewController {
+class SecondViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+}
+
+class SecondDetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
     }
 
-    override var prefersNavigationBarTransparent: Bool {
-        return true
-    }
-
     override var tabBarTheme: CuteTabBarTheme {
-        return .transparent
+        return .dark
     }
 }
