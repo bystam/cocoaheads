@@ -139,6 +139,7 @@ final class CuteTabBarController: UITabBarController {
     }
 
     func cleanUpNavigationTransition() {
+        tabBar.mask = nil
         barSnapshot?.removeFromSuperview()
     }
 }
