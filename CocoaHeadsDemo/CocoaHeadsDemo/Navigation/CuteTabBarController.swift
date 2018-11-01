@@ -33,12 +33,18 @@ final class CuteTabBarTheme: NSObject {
 
 final class CuteTabBarController: UITabBarController {
 
+    enum TabBarTransitionDirection {
+        case left, right
+    }
+
     private let barShadowView: UIView = {
         let view = UIView()
         view.autoresizingMask = [.flexibleBottomMargin]
         view.backgroundColor = UIColor(white: 0.0, alpha: 0.1)
         return view
     }()
+
+    private var barSnapshot: UIView?
 
     override var selectedIndex: Int {
         didSet {
@@ -60,11 +66,7 @@ final class CuteTabBarController: UITabBarController {
         barShadowView.frame = CGRect(x: 0, y: 0, width: tabBar.bounds.width, height: 1.0)
     }
 
-    private func reloadTabBarStyle() {
-        guard let theme = selectedViewController?.tabBarTheme else {
-            return
-        }
-
+    func configureTabBar(with theme: CuteTabBarTheme) {
         tabBar.tintColor = theme.selectedColor
         tabBar.isTranslucent = theme.backgroundColor.isClear
         tabBar.barTintColor = theme.backgroundColor
@@ -73,11 +75,71 @@ final class CuteTabBarController: UITabBarController {
         viewControllers?
             .compactMap { $0.tabBarItem }
             .forEach { paint($0, with: theme) }
+
+        if let snapshot = barSnapshot {
+            tabBar.bringSubviewToFront(snapshot)
+        }
+    }
+
+    private func reloadTabBarStyle() {
+        guard let theme = selectedViewController?.tabBarTheme else {
+            return
+        }
+        configureTabBar(with: theme)
     }
 
     private func paint(_ item: UITabBarItem, with theme: CuteTabBarTheme) {
         item.selectedImage = item.selectedImage?.tinted(with: theme.selectedColor)
         item.image = item.image?.tinted(with: theme.deselectedColor)
+    }
+
+    // MARK: - Cute transition
+
+    func prepareForTabBarNavigationTransition(from direction: TabBarTransitionDirection) {
+        guard let snapshot = tabBar.snapshotView(afterScreenUpdates: false) else {
+            return
+        }
+        snapshot.frame = tabBar.frame
+        snapshot.isUserInteractionEnabled = false
+
+        if tabBar.barTintColor?.isClear == true {
+            tabBar.mask = UIView()
+            tabBar.mask?.backgroundColor = .white
+            tabBar.mask?.frame = snapshot.bounds
+            view.insertSubview(snapshot, belowSubview: tabBar)
+
+            let width = tabBar.bounds.width
+            switch direction {
+            case .left:
+                tabBar.mask?.transform = CGAffineTransform(translationX: -width, y: 0)
+            case .right:
+                tabBar.mask?.transform = CGAffineTransform(translationX: width, y: 0)
+            }
+
+        } else {
+            snapshot.mask = UIView()
+            snapshot.mask?.backgroundColor = .white
+            snapshot.mask?.frame = snapshot.bounds
+            view.insertSubview(snapshot, aboveSubview: tabBar)
+        }
+
+        self.barSnapshot = snapshot
+    }
+
+    func animateNavigationTransition(to direction: TabBarTransitionDirection) {
+        let width = tabBar.bounds.width
+        switch direction {
+        case .left:
+            tabBar.mask?.transform = .identity
+            barSnapshot?.mask?.transform = CGAffineTransform(translationX: -width, y: 0)
+        case .right:
+            tabBar.mask?.transform = .identity
+            barSnapshot?.mask?.transform = CGAffineTransform(translationX: width, y: 0)
+        }
+    }
+
+    func cleanUpNavigationTransition() {
+        barSnapshot?.removeFromSuperview()
     }
 }
 

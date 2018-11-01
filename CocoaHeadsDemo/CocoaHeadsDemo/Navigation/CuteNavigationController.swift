@@ -47,6 +47,7 @@ final class CuteNavigationController: UINavigationController {
 
     private func performTransition(between current: UIViewController?, and next: UIViewController?, isPush: Bool, animated: Bool) {
         transitionNavigationBar(between: current, and: next, isPush: isPush, animated: animated)
+        transitionTabBar(between: current, and: next, isPush: isPush, animated: animated)
     }
 
     private func transitionNavigationBar(between current: UIViewController?, and next: UIViewController?, isPush: Bool, animated: Bool) {
@@ -79,6 +80,37 @@ final class CuteNavigationController: UINavigationController {
 
         } else {
             navbar.backgroundOffset = willBeTransparent ? .left : .none
+        }
+    }
+
+    private func transitionTabBar(between current: UIViewController?, and next: UIViewController?, isPush: Bool, animated: Bool) {
+        guard let tabController = tabBarController as? CuteTabBarController else {
+            return
+        }
+
+        let oldTheme = current?.tabBarTheme ?? .light
+        let newTheme = next?.tabBarTheme ?? .light
+
+        guard oldTheme !== newTheme else {
+            return
+        }
+
+        if let coordinator = transitionCoordinator, animated {
+
+            tabController.prepareForTabBarNavigationTransition(from: isPush ? .right : .left)
+            tabController.configureTabBar(with: newTheme)
+
+            coordinator.animate(alongsideTransition: { context in
+                tabController.animateNavigationTransition(to: isPush ? .left : .right)
+            }, completion: { context in
+                if context.isCancelled {
+                    tabController.configureTabBar(with: oldTheme)
+                }
+                tabController.cleanUpNavigationTransition()
+            })
+
+        } else {
+            tabController.configureTabBar(with: newTheme)
         }
     }
 }
