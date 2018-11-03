@@ -17,21 +17,21 @@ final class CuteTabBarTheme: NSObject {
         self.hasShadow = hasShadow
     }
 
-    static let light: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .darkPurple,
-                                                        deselectedColor: .lightGray,
-                                                        backgroundColor: UIColor(red: (253.0 / 255),
-                                                                                 green: (248.0 / 255),
-                                                                                 blue: (255.0 / 255),
-                                                                                 alpha: 1.0),
-                                                        hasShadow: true)
-    static let transparent: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .white,
-                                                              deselectedColor: .lightGray,
-                                                              backgroundColor: .clear,
-                                                              hasShadow: false)
-    static let dark: CuteTabBarTheme = CuteTabBarTheme(selectedColor: .white,
-                                                       deselectedColor: .lightGray,
-                                                       backgroundColor: UIColor(white: 0.1, alpha: 1.0),
-                                                       hasShadow: false)
+    static let light: CuteTabBarTheme = .init(selectedColor: .darkPurple,
+                                              deselectedColor: .lightGray,
+                                              backgroundColor: UIColor(red: (253.0 / 255),
+                                                                       green: (248.0 / 255),
+                                                                       blue: (255.0 / 255),
+                                                                       alpha: 1.0),
+                                              hasShadow: true)
+    static let transparent: CuteTabBarTheme = .init(selectedColor: .white,
+                                                    deselectedColor: .lightGray,
+                                                    backgroundColor: .clear,
+                                                    hasShadow: false)
+    static let dark: CuteTabBarTheme = .init(selectedColor: .white,
+                                             deselectedColor: .lightGray,
+                                             backgroundColor: UIColor(white: 0.1, alpha: 1.0),
+                                             hasShadow: false)
 }
 
 
