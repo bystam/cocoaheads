@@ -100,7 +100,7 @@ final class CuteNavigationController: UINavigationController {
             tabController.prepareForTabBarNavigationTransition(from: isPush ? .right : .left)
             tabController.configureTabBar(with: newTheme)
 
-            coordinator.animate(alongsideTransition: { context in
+            coordinator.animateAlongsideTransition(in: tabController.tabBar, animation: { context in
                 tabController.animateNavigationTransition(to: isPush ? .left : .right)
             }, completion: { context in
                 if context.isCancelled {
